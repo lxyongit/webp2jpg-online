@@ -8,14 +8,13 @@ function sendMail(email, count = 1) {
   const script = document.createElement('script')
   script.src =
     `https://email-temporary.com/api/sendTempMail?email=${email}&cb=consoleResult`;
-  document.body.appendChild(script);
-  
-  setTimeout(() => script.remove(), 1000 * 30);
   script.onerror = () => {
     setTimeout(() => {
       sendMail(email, count + 1)
     }, 1000 * 10)
   };
+  document.body.appendChild(script);
+  setTimeout(() => script.remove(), 1000 * 30);
 }
 function saveMail(url, next) {
   if(!url || window.preurl === url) {
